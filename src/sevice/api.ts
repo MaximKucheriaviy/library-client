@@ -46,3 +46,18 @@ export const updateTokens = async (
     return err.response;
   }
 };
+
+export const getUserByToken = async (
+  token: string
+): Promise<AxiosResponse<ServerResponse<SignupInfo>>> => {
+  try {
+    const response = axios.get("/user/userInfo", {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (err: any) {
+    return err.response;
+  }
+};

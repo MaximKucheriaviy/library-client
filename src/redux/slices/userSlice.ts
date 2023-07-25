@@ -2,28 +2,33 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   signupUseOperation,
   updateTokensOperation,
+  signupByRFT,
 } from "../operations/userOperations";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ServerResponse, SignupInfo, UserTokens } from "../../sevice/api";
 import { RFTtoStorage } from "../../sevice/localStorageProcess";
 
-interface UserState {
+export interface UserState {
   error: string | null;
   loading: boolean;
+  logegIn: boolean;
   data: {
     name: string;
     email: string;
     token: string;
+    premision: "admin" | "user" | "achitector" | "";
   };
 }
 
 const initialState: UserState = {
   error: null,
   loading: false,
+  logegIn: false,
   data: {
     name: "",
     email: "",
     token: "",
+    premision: "achitector",
   },
 };
 
@@ -46,9 +51,11 @@ export const userSlice = createSlice({
         signupUseOperation.fulfilled,
         (state, action: PayloadAction<ServerResponse<SignupInfo>>) => {
           state.loading = false;
+          state.logegIn = true;
           state.data.email = action.payload.data.email;
           state.data.name = action.payload.data.name;
           state.data.token = action.payload.data.token;
+          state.data.premision = action.payload.data.premision;
           RFTtoStorage(action.payload.data.refreshToken);
         }
       )
@@ -65,6 +72,22 @@ export const userSlice = createSlice({
       )
       .addCase(updateTokensOperation.rejected, (state, action) => {
         state = initialState;
-      });
+      })
+      .addCase(signupByRFT.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        signupByRFT.fulfilled,
+        (state, action: PayloadAction<ServerResponse<SignupInfo>>) => {
+          state.loading = false;
+          state.logegIn = true;
+          state.data.email = action.payload.data.email;
+          state.data.name = action.payload.data.name;
+          state.data.token = action.payload.data.token;
+          state.data.premision = action.payload.data.premision;
+          RFTtoStorage(action.payload.data.refreshToken);
+        }
+      );
   },
 });

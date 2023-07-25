@@ -25,6 +25,8 @@ export const StyledInput = styled.div<PropsStyled>`
 
     font-size: 16px;
 
+    transition-property: border, box-shadow;
+    transition-duration: 250ms;
     &:focus {
       outline: none;
       border: 3px solid ${(props) => props.theme.primaryColor};

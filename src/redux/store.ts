@@ -9,6 +9,8 @@ export const store = configureStore({
   },
 });
 
+export const RootState = store.getState();
+
 type StoreDispatch = typeof store.dispatch;
 export const useStoreDispatch = useDispatch<StoreDispatch>;
 

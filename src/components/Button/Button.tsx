@@ -1,11 +1,24 @@
 import React from "react";
-import { StyledButton } from "./ButtonStyled";
+import { StyledButton, StyledProps } from "./ButtonStyled";
 
-interface Props {
+interface Props extends StyledProps {
   text: string;
   type?: "button" | "submit";
 }
 
-export const Button: React.FC<Props> = ({ text, type = "button" }) => {
-  return <StyledButton type={type}>{text}</StyledButton>;
+export const Button: React.FC<Props> = ({
+  text,
+  type = "button",
+  margin_bottom = 0,
+  margin_top = 0,
+}) => {
+  return (
+    <StyledButton
+      margin_top={margin_top}
+      margin_bottom={margin_bottom}
+      type={type}
+    >
+      {text}
+    </StyledButton>
+  );
 };

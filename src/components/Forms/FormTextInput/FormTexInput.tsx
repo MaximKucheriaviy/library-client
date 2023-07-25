@@ -8,6 +8,8 @@ interface Porps extends PropsStyled {
   name: string;
   placeholder?: string;
   autocomplite?: boolean;
+  chageCallback: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
 }
 
 export const FormTextInput: React.FC<Porps> = ({
@@ -17,8 +19,13 @@ export const FormTextInput: React.FC<Porps> = ({
   name,
   placeholder = "",
   autocomplite = false,
+  chageCallback,
+  value,
 }) => {
   const [ID] = useState<string>(v4());
+  const chage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    chageCallback(event.target.value);
+  };
   return (
     <StyledInput margintop={margintop} marginbotton={marginbotton}>
       <label htmlFor={ID}>{name}</label>
@@ -28,6 +35,8 @@ export const FormTextInput: React.FC<Porps> = ({
         id={ID}
         placeholder={placeholder}
         autoComplete={autocomplite ? "true" : "false"}
+        onChange={chage}
+        value={value}
       />
     </StyledInput>
   );

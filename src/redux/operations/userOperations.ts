@@ -7,6 +7,7 @@ import {
   ServerResponse,
   SignupData,
   UserTokens,
+  getUserByToken,
 } from "../../sevice/api";
 
 export const signupUseOperation = createAsyncThunk(
@@ -37,5 +38,26 @@ export const updateTokensOperation = createAsyncThunk(
       return thunkAPI.rejectWithValue(result);
     }
     return result;
+  }
+);
+
+export const signupByRFT = createAsyncThunk(
+  "user/signupByRFT",
+  async (_, thunkAPI): Promise<ServerResponse<SignupInfo> | any> => {
+    const RFT = getRFTfromStorage();
+    if (RFT === null) {
+      return thunkAPI.rejectWithValue("no stored RFT");
+    }
+    const result = await updateTokens(RFT);
+    if (result.status !== 201) {
+      return thunkAPI.rejectWithValue(result.data);
+    }
+    const userResult = await getUserByToken(result.data.data.token);
+    if (userResult.status !== 200) {
+      return thunkAPI.rejectWithValue(userResult.data);
+    }
+    userResult.data.data.token = result.data.data.token;
+    userResult.data.data.refreshToken = result.data.data.refreshToken;
+    return userResult.data;
   }
 );
