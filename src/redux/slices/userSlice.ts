@@ -71,7 +71,13 @@ export const userSlice = createSlice({
         }
       )
       .addCase(updateTokensOperation.rejected, (state, action) => {
-        state = initialState;
+        state.loading = false;
+        state.logegIn = false;
+        state.data.email = "";
+        state.data.name = "";
+        state.data.token = "";
+        state.data.premision = "";
+        RFTtoStorage("");
       })
       .addCase(signupByRFT.pending, (state) => {
         state.loading = true;
@@ -88,6 +94,15 @@ export const userSlice = createSlice({
           state.data.premision = action.payload.data.premision;
           RFTtoStorage(action.payload.data.refreshToken);
         }
-      );
+      )
+      .addCase(signupByRFT.rejected, (state) => {
+        state.loading = false;
+        state.logegIn = false;
+        state.data.email = "";
+        state.data.name = "";
+        state.data.token = "";
+        state.data.premision = "";
+        RFTtoStorage("");
+      });
   },
 });

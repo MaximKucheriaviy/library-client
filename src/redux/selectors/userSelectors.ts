@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { UserState } from "../slices/userSlice";
 import { RootState } from "../store";
 
 export const useLogedIn = (): typeof RootState.user.logegIn => {
