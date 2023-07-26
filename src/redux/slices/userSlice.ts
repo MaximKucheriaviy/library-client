@@ -3,6 +3,7 @@ import {
   signupUseOperation,
   updateTokensOperation,
   signupByRFT,
+  logoutOperation,
 } from "../operations/userOperations";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ServerResponse, SignupInfo, UserTokens } from "../../sevice/api";
@@ -104,6 +105,22 @@ export const userSlice = createSlice({
         state.data.token = "";
         state.data.premision = "";
         RFTtoStorage("");
+      })
+      .addCase(logoutOperation.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutOperation.fulfilled, (state) => {
+        state.loading = false;
+        state.logegIn = false;
+        state.data.email = "";
+        state.data.name = "";
+        state.data.token = "";
+        state.data.premision = "";
+        RFTtoStorage("");
+      })
+      .addCase(logoutOperation.rejected, (state) => {
+        state.loading = false;
       });
   },
 });

@@ -61,3 +61,10 @@ export const signupByRFT = createAsyncThunk(
     return userResult.data;
   }
 );
+
+export const logoutOperation = createAsyncThunk(
+  "user/logout",
+  async (_, thunkAPI): Promise<boolean> => {
+    return true;
+  }
+);
