@@ -35,9 +35,9 @@ export const updateTokensOperation = createAsyncThunk(
     }
     const result = await updateTokens(RFT);
     if (result.status !== 201) {
-      return thunkAPI.rejectWithValue(result);
+      return thunkAPI.rejectWithValue(result.data);
     }
-    return result;
+    return result.data;
   }
 );
 

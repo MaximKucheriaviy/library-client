@@ -68,6 +68,7 @@ export const userSlice = createSlice({
         (state, action: PayloadAction<ServerResponse<UserTokens>>) => {
           RFTtoStorage(action.payload.data.refreshToken);
           state.data.token = action.payload.data.token;
+          state.loading = false;
         }
       )
       .addCase(updateTokensOperation.rejected, (state, action) => {

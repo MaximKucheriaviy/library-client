@@ -29,11 +29,11 @@ export const SignUpForm: React.FC = () => {
         name={"Пароль"}
         placeholder=""
         type="password"
-        autocomplite
+        autocomplite={false}
         value={password}
         chageCallback={setPassword}
       />
-      <Button text="Увійти" type="submit" margin_top={20} />
+      <Button text="Увійти" type="submit" margin_top={20} width="150px" />
     </StyledForm>
   );
 };

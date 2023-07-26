@@ -6,6 +6,7 @@ import { ClosedRout } from "./components/RoutingController/RoutingController";
 import { useStoreDispatch } from "./redux/store";
 import { useEffect } from "react";
 import { signupByRFT } from "./redux/operations/userOperations";
+import { ArchitectorPage } from "./pages/ArhitectorPage.tsx/ArchitectorPage";
 
 function App() {
   const dispatch = useStoreDispatch();
@@ -22,6 +23,14 @@ function App() {
             element={
               <ClosedRout type="admin">
                 <AdminPage />
+              </ClosedRout>
+            }
+          />
+          <Route
+            path="/architector"
+            element={
+              <ClosedRout type="architector">
+                <ArchitectorPage />
               </ClosedRout>
             }
           />
