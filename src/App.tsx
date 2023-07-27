@@ -7,6 +7,7 @@ import { useStoreDispatch } from "./redux/store";
 import { useEffect } from "react";
 import { signupByRFT } from "./redux/operations/userOperations";
 import { ArchitectorPage } from "./pages/ArhitectorPage.tsx/ArchitectorPage";
+import { AddBookPage } from "./pages/ArhitectorPage.tsx/AddBookPage.tsx/AddBook";
 
 function App() {
   const dispatch = useStoreDispatch();
@@ -33,7 +34,9 @@ function App() {
                 <ArchitectorPage />
               </ClosedRout>
             }
-          />
+          >
+            <Route path="addbook" element={<AddBookPage />} />
+          </Route>
         </Routes>
       </SharedLayout>
     </div>

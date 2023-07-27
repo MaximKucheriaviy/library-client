@@ -3,6 +3,7 @@ import { StyledMain } from "../StyledMain";
 
 export const ArhitectorPageStyleds = styled(StyledMain)`
   margin-top: 0;
+  display: flex;
 `;
 export const NavigationBar = styled.div`
   border-right: 2px solid black;
@@ -13,4 +14,11 @@ export const NavigationBar = styled.div`
   & button {
     display: block;
   }
+`;
+
+export const OutletDiv = styled.div`
+  padding-right: 30px;
+  padding-top: 50px;
+  padding-left: 30px;
+  padding-bottom: 50px;
 `;
