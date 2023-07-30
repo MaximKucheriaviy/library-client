@@ -14,7 +14,7 @@ export const SignUpForm: React.FC = () => {
     dispatch(signupUseOperation({ email, password }));
   };
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm onSubmit={onSubmit} border={1}>
       <h2>Увійти до системи</h2>
       <FormTextInput
         margintop={30}

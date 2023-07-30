@@ -1,10 +1,11 @@
 import { OutletDiv } from "../ArhitectorPageStyled";
-import { Dropzone } from "../../../components/Forms/Dropzone/Dropzone";
+import { CreateBookForm } from "../../../components/Forms/CreateBookForm/CreateBookForm";
 import React from "react";
+
 export const AddBookPage: React.FC = () => {
   return (
     <OutletDiv>
-      <Dropzone width="200px" height="200px" />
+      <CreateBookForm width="auto" />
     </OutletDiv>
   );
 };

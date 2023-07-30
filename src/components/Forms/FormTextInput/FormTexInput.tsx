@@ -8,8 +8,8 @@ interface Porps extends PropsStyled {
   name: string;
   placeholder?: string;
   autocomplite?: boolean;
-  chageCallback: React.Dispatch<React.SetStateAction<string>>;
-  value: string;
+  chageCallback: React.Dispatch<React.SetStateAction<any>>;
+  value: string | number;
 }
 
 export const FormTextInput: React.FC<Porps> = ({
@@ -21,23 +21,52 @@ export const FormTextInput: React.FC<Porps> = ({
   autocomplite = false,
   chageCallback,
   value,
+  width,
+  height,
+  inputFontSize,
 }) => {
   const [ID] = useState<string>(v4());
-  const chage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const chage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (type === "number" && event.target instanceof HTMLInputElement) {
+      if (Number.isNaN(event.target.valueAsNumber)) {
+        chageCallback(0);
+        return;
+      }
+      chageCallback(event.target.valueAsNumber);
+      return;
+    }
     chageCallback(event.target.value);
   };
   return (
-    <StyledInput margintop={margintop} marginbotton={marginbotton}>
+    <StyledInput
+      margintop={margintop}
+      marginbotton={marginbotton}
+      width={width}
+      inputFontSize={inputFontSize}
+      height={height}
+    >
       <label htmlFor={ID}>{name}</label>
-      <input
-        type={type}
-        name={name}
-        id={ID}
-        placeholder={placeholder}
-        autoComplete={autocomplite ? "true" : "false"}
-        onChange={chage}
-        value={value}
-      />
+      {type !== "textAria" ? (
+        <input
+          type={type}
+          name={name}
+          id={ID}
+          placeholder={placeholder}
+          autoComplete={autocomplite ? "true" : "false"}
+          onChange={chage}
+          value={value}
+        />
+      ) : (
+        <textarea
+          name={name}
+          id={ID}
+          placeholder={placeholder}
+          onChange={chage}
+          value={value}
+        ></textarea>
+      )}
     </StyledInput>
   );
 };
