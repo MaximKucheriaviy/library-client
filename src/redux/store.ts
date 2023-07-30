@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "./slices/userSlice";
-import { type } from "os";
 import { useDispatch } from "react-redux";
+import { customLoadingSlice } from "./slices/customLoadingSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
+    loading: customLoadingSlice.reducer,
   },
 });
 

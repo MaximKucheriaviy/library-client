@@ -5,5 +5,8 @@ export const useIsLoading = (): boolean => {
   const userLoading = useSelector<typeof RootState, boolean>(
     (state) => state.user.loading
   );
-  return userLoading;
+  const customLoading = useSelector<typeof RootState, boolean>(
+    (state) => state.loading.value
+  );
+  return userLoading || customLoading;
 };

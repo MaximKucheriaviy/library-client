@@ -61,3 +61,17 @@ export const getUserByToken = async (
     return err.response;
   }
 };
+
+export const createBook = async (token: string, data: FormData) => {
+  try {
+    const response = axios.post("/books", {
+      data,
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (err: any) {
+    return err.response;
+  }
+};

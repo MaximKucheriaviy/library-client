@@ -3,6 +3,10 @@ import { useState } from "react";
 import { FormTextInput } from "../FormTextInput/FormTexInput";
 import { CrateBookFormStyeld } from "./CreateBookFormStyled";
 import { Dropzone } from "../Dropzone/Dropzone";
+import { Button } from "../../Button/Button";
+import { createBook } from "../../../sevice/api";
+import { useStoreDispatch } from "../../../redux/store";
+import { enable } from "../../../redux/slices/customLoadingSlice";
 
 interface Props extends StyledProps {}
 
@@ -17,9 +21,21 @@ export const CreateBookForm: React.FC<Props> = ({
   const [countOfExamples, setCountOfExamples] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
   const [keyWords, setKeyWords] = useState<string>("");
+
   const marginTop = 35;
+  const dispatch = useStoreDispatch();
+
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("submit");
+    dispatch(enable());
+  };
   return (
-    <CrateBookFormStyeld width={width} border={border ? 1 : 0}>
+    <CrateBookFormStyeld
+      width={width}
+      border={border ? 1 : 0}
+      onSubmit={onSubmit}
+    >
       <h2>Створити книгу</h2>
       <div className="mainBlock">
         <div className="leftBlock">
@@ -62,8 +78,11 @@ export const CreateBookForm: React.FC<Props> = ({
             value={keyWords}
             chageCallback={setKeyWords}
             margintop={marginTop}
+            marginbotton={marginTop}
           />
+          <Button text="Створити" type="submit" width="200px" />
         </div>
+
         <div className="rightBlock">
           <div className="dropzone">
             <Dropzone width="250px" height="250px" />
