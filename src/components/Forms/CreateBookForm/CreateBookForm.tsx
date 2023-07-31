@@ -6,7 +6,8 @@ import { Dropzone } from "../Dropzone/Dropzone";
 import { Button } from "../../Button/Button";
 import { createBook } from "../../../sevice/api";
 import { useStoreDispatch } from "../../../redux/store";
-import { enable } from "../../../redux/slices/customLoadingSlice";
+import { enable, disable } from "../../../redux/slices/customLoadingSlice";
+import { useToken } from "../../../redux/selectors/userSelectors";
 
 interface Props extends StyledProps {}
 
@@ -25,11 +26,32 @@ export const CreateBookForm: React.FC<Props> = ({
 
   const marginTop = 35;
   const dispatch = useStoreDispatch();
-
-  const onSubmit = (event: React.FormEvent) => {
+  const token = useToken();
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("submit");
     dispatch(enable());
+    const formData = new FormData();
+    if (picture) {
+      formData.append("picture", picture);
+      formData.append("name", name);
+      formData.append("autor", autor);
+      formData.append("reliseDate", reliseDate.toString());
+      formData.append("janre", JSON.stringify(janre.split(" ")));
+      formData.append("countOfExamples", countOfExamples.toString());
+      formData.append("description", description);
+      formData.append("keyWords", JSON.stringify(keyWords.split(" ")));
+    }
+    createBook(token, formData)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(disable());
+      });
   };
   return (
     <CrateBookFormStyeld
