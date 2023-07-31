@@ -21,6 +21,7 @@ export const CreateBookForm: React.FC<Props> = ({
   const [countOfExamples, setCountOfExamples] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
   const [keyWords, setKeyWords] = useState<string>("");
+  const [picture, setFile] = useState<File | null>();
 
   const marginTop = 35;
   const dispatch = useStoreDispatch();
@@ -85,7 +86,7 @@ export const CreateBookForm: React.FC<Props> = ({
 
         <div className="rightBlock">
           <div className="dropzone">
-            <Dropzone width="250px" height="250px" />
+            <Dropzone width="250px" height="250px" setFile={setFile} />
           </div>
           <FormTextInput
             name="Опис"

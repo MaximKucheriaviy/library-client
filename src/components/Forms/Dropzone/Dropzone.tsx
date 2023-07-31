@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { StyledDropzone, StyledProps } from "./DropzoneStyled";
 import { AiFillFileImage, AiOutlineClose } from "react-icons/ai";
 
-interface Pops extends StyledProps {}
+interface Pops extends StyledProps {
+  setFile: Function;
+}
 
-export const Dropzone: React.FC<Pops> = ({ width, height }) => {
+export const Dropzone: React.FC<Pops> = ({ width, height, setFile }) => {
   const [active, setActive] = useState<boolean>(false);
   const [imgURL, setIngURL] = useState<string>("");
 
@@ -27,14 +29,14 @@ export const Dropzone: React.FC<Pops> = ({ width, height }) => {
       return;
     }
     const path = URL.createObjectURL(item);
-    console.log(path);
-
+    setFile(item);
     setIngURL(path);
   };
 
   const reset = () => {
     setActive(false);
     setIngURL("");
+    setFile(null);
   };
   return (
     <StyledDropzone
