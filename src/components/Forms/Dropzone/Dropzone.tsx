@@ -29,6 +29,8 @@ export const Dropzone: React.FC<Pops> = ({ width, height, setFile }) => {
       return;
     }
     const path = URL.createObjectURL(item);
+    console.log(item);
+
     setFile(item);
     setIngURL(path);
   };

@@ -64,10 +64,10 @@ export const getUserByToken = async (
 
 export const createBook = async (token: string, data: FormData) => {
   try {
-    const response = axios.post("/books", {
-      data,
+    const response = axios.post("/books", data, {
       headers: {
         Authorization: token,
+        "Content-Type": "multipart/form-data",
       },
     });
     return response;

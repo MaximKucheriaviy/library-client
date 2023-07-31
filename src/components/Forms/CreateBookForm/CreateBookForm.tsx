@@ -37,7 +37,7 @@ export const CreateBookForm: React.FC<Props> = ({
       formData.append("name", name);
       formData.append("autor", autor);
       formData.append("reliseDate", reliseDate.toString());
-      formData.append("janre", JSON.stringify(janre.split(" ")));
+      formData.append("ganre", JSON.stringify(janre.split(" ")));
       formData.append("countOfExamples", countOfExamples.toString());
       formData.append("description", description);
       formData.append("keyWords", JSON.stringify(keyWords.split(" ")));
