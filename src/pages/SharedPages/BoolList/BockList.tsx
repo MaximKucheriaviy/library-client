@@ -1,13 +1,11 @@
-import { useEffect } from "react";
 import React from "react";
 import { OutletDiv } from "../../ArhitectorPage.tsx/ArhitectorPageStyled";
-import { BoockList } from "../../../components/BoockList/BockList";
+import { BookList } from "../../../components/BoockList/BookList";
 
-export const BoockLibrary: React.FC = () => {
-  useEffect(() => {}, []);
+export const BookLibrary: React.FC = () => {
   return (
     <OutletDiv>
-      <BoockList keyword="" />
+      <BookList keyword="" />
     </OutletDiv>
   );
 };
