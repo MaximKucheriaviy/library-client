@@ -9,6 +9,7 @@ import { signupByRFT } from "./redux/operations/userOperations";
 import { ArchitectorPage } from "./pages/ArhitectorPage.tsx/ArchitectorPage";
 import { AddBookPage } from "./pages/ArhitectorPage.tsx/AddBookPage.tsx/AddBook";
 import { BookLibrary } from "./pages/SharedPages/BoolList/BockList";
+import { BoockInfoPage } from "./pages/SharedPages/BookInfo/BookInfo";
 function App() {
   const dispatch = useStoreDispatch();
   useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
           >
             <Route path="addbook" element={<AddBookPage />} />
             <Route path="library" element={<BookLibrary />} />
+            <Route path="library/:id" element={<BoockInfoPage />} />
           </Route>
         </Routes>
       </SharedLayout>

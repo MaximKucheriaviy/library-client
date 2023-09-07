@@ -104,3 +104,12 @@ export const getAllBooks = async (keyword: string) => {
     return error.response;
   }
 };
+
+export const getBookById = async (id: string) => {
+  try {
+    const result = await axios.get(`books/${id}`);
+    return result.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
