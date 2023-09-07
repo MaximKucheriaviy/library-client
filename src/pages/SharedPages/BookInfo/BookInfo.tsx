@@ -22,11 +22,11 @@ export const BoockInfoPage: React.FC = () => {
         <div className="imageThumb box">
           <img src={book?.picture.url} alt={book?.name} />
         </div>
+        <div className="titleBox box">
+          <p className="title">{book?.name}</p>
+        </div>
         <div className="infoThumb box">
-          <p>
-            <span>Name</span>
-            {book?.name}
-          </p>
+          <p className="author">{book?.author}</p>
         </div>
         <div className="description box"></div>
       </StyledBookInfo>
